@@ -1,0 +1,45 @@
+# sudo chmod -R 777 ./addons
+
+#docker exec -it sxe_tarea16_definitiva-web-1 id odoo
+# docker exec -it sxe_tarea16_definitiva-web-1 /bin/bash
+# b32p-w33z-62nb
+# odoo scaffold modulo_triste /mnt/addons/
+# http://localhost:8069/web?debug=1
+services:
+  web:
+    image: odoo:18.0
+    depends_on:
+      - mydb
+    ports:
+      - "8069:8069"
+    environment:
+      - HOST=mydb
+      - USER=odoo
+      - PASSWORD=myodoo
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./config:/etc/odoo
+      - ./addons:/mnt/extra-addons
+  mydb:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=myodoo
+      - POSTGRES_USER=odoo
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_container
+    environment:
+      PGADMIN_DEFAULT_EMAIL: piero@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: sxe_user_password_db
+    ports:
+      - "8081:80"
+    depends_on:
+      - mydb
+    restart: unless-stopped
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
