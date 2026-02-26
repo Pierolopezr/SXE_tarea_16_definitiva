@@ -1,20 +1,49 @@
 <odoo>
   <data>
+
     <!-- explicit list view definition -->
-<!--
-    <record model="ir.ui.view" id="fidelizacion_de_clientes.list">
-      <field name="name">fidelizacion_de_clientes list</field>
-      <field name="model">fidelizacion_de_clientes.fidelizacion_de_clientes</field>
+
+    <record model="ir.ui.view" id="fidelizacion_de_clientes.form">
+      <field name="name">fidelizacion_de_clientes form</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
       <field name="arch" type="xml">
-        <list>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </list>
+          <xpath expr="//notebook" position="inside">
+              <page string="Membresia">
+                  <group>
+                      <field name="Nivel_de_fidelidad" string="Nivel de fidelidad"/>
+                      <field name="Codigo_de_socio" string="Codigo de socio"/>
+                  </group>
+              </page>
+          </xpath>
       </field>
     </record>
--->
+    <record model="ir.ui.view" id="fidelizacion_de_clientes.list">
+        <field name="name">fidelizacion_de_clientes list</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='complete_name']" position="after">
+                <field name="Nivel_de_fidelidad" string="Nivel de fidelidad"/>
+            </xpath>
+            <xpath expr ="//list/field[@name='Nivel_de_fidelidad']" position="attributes">
+                <attribute name="decoration-info">Nivel_de_fidelidad in ('Gold','Premium')</attribute>
+            </xpath>
+        </field>
+    </record>
 
+
+    <record model="ir.ui.view" id="fidelizacion_de_clientes.kanban">
+        <field name="name">fidelizacion_de_clientes kanban</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='mb-1']/field[@name='display_name']" position="after">
+                <br/>
+                <field name="Nivel_de_fidelidad"/>
+            </xpath>
+        </field>
+    </record>
     <!-- actions opening views on models -->
 <!--
     <record model="ir.actions.act_window" id="fidelizacion_de_clientes.action_window">

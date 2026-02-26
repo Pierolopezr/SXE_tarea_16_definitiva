@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SXE_tarea16_definitiva.iml" filepath="$PROJECT_DIR$/SXE_tarea16_definitiva.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SXE_tarea_16_definitiva.iml" filepath="$PROJECT_DIR$/.idea/SXE_tarea_16_definitiva.iml" />
     </modules>
   </component>
 </project>
